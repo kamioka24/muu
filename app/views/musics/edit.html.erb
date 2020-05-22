@@ -1,2 +1,26 @@
-<h1>Musics#edit</h1>
-<p>Find me in app/views/musics/edit.html.erb</p>
+<h2>Editing Music</h2>
+
+<%= form_for (@music) do |f| %>
+
+	<% if @music.errors.any? %>
+		<%= @music.errors.count %>error prohibited this music from being saved:<br>
+		<ul>
+			<% @music.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	<% end %>
+
+	<p>Title<br>
+	<%= f.text_field :title %></p>
+
+	<p>Aritist<br>
+	<%= f.text_field :artist %></p>
+
+	<p><%= f.submit "Update Music" %></p>
+
+	<p><%= link_to "Show", music_path(@music) %> |
+	<%= link_to "Back", musics_path %></p>
+
+
+<% end %>

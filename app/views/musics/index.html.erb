@@ -1,2 +1,40 @@
-<h1>Musics#index</h1>
-<p>Find me in app/views/musics/index.html.erb</p>
+<p><%= flash[:notice] %></p>
+
+<h2>Musics</h2>
+<table width="800">
+	<tr>
+		<th>Title</th>
+		<th>Artist</th>
+	</tr>
+	<% @musics.each do |music| %>
+		<tr align="center">
+			<td><%= link_to music.title, music_path(music) %></td>
+			<td><%= music.artist %></td>
+			<td><%= link_to "Edit", edit_music_path(music) %></td>
+			<td><%= link_to "Destroy", music_path(music), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h2>New Music</h2>
+<%= form_for (@music) do |f| %>
+
+	<% if @music.errors.any? %>
+		<%= @music.errors.count %>error prohibited this music from being saved:<br>
+		<ul>
+			<% @music.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	<% end %>
+
+	<p>Title<br>
+	<%= f.text_field :title %></p>
+
+	<p>Aritist<br>
+	<%= f.text_field :artist %></p>
+
+	<p><%= f.submit "Create Music" %></p>
+
+
+<% end %>
