@@ -6,7 +6,7 @@ class MusicsController < ApplicationController
 
   def index
   	@music = Music.new
-  	@musics = Music.all
+  	@musics = Music.all.order(created_at: :desc) #降順
   end
 
   def show
